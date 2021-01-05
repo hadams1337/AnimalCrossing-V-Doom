@@ -1,6 +1,6 @@
 Animal Crossing or DOOM?
 An exploration of reddit posts from each subreddit community
-<p float="left">
+<p float="center">
   <img width="350" height="200" src=./cute/logos.jpg>
 </p>
 
@@ -13,7 +13,20 @@ Here are some example posts from each subreddit
 </p>
 First I processed the titles by removing stopwords and punctuation (other than ? and !) and using sklearn, TF-IDF(as opposed to a count of the words, this lowers the importance of the words that are most common and likely to appear in both, videogames, maybe.)
 Then I performed Naive Bayes to find the words that were most likely to be present in Doom and Animal Crossing posts.  The size of the wedge shows the likelihood of each word being found in a post from the respective subreddit.
-Titles- The size indicates the 
+
+
+
+Titles- The size indicates the normalized likelihood that the word in the chart was in the title of the respective subreddit.
+<p float="left">
+  <img width="350" height="300" src=./graphs/acnh_titles_pie.png>
+  <img width="350" height="300" src=./graphs/titles_doom_pie.png>
+</p>
+There are several important things to notice in this graph:
+
+The distribution of the words for animal crossing are a lot more evenly sized, when people talk about doom, they use the same words most of the time.
+
+The animal crossing words include the word doom!  That's likely because the games were released the same day, which gave rise to some crossover fan art. 
+
 
 Body-More Natural Language Processing
 
