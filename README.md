@@ -42,11 +42,25 @@ To fill out the picture of "what are common traits of doom and animal crossing p
 The presence of the words "know" and "poll" in both sets of posts likely means that people are asking questions like, "do you know how to..." or submitting polls for the majority of posts in both subreddits.
 
 ### Pictures -I used KNN to find 'mood' of the pictures
-This step was slightly more complicated.  I was curious to see if I could use the colors of the pictures to see if the "mood" of the pictures varied.  I decided to use the relative prevalence of the color.
+I was curious to see if I could use the colors of the pictures to see if the "mood" of the pictures varied between subreddits.  I wanted to check two things: what are the color differences between the two subreddits, and how much accent color is there in each picture?  Does the number and importance of accent colors vary between the groups?
+I average the colors for each picture using K-Nearest Neighbors to find 20 colors to represent the picture in RGB 256 values.  Then I rounded each value (red, green and blue) separately to the nearest 5 in hopes that I would get some repeat values, I didn't need precision to closer than 5 for each number.
+The colors were recombined and formed the column names for a pandas dataframe in which the column names were the rgb value as a string and the values were the number of pixels in that file (row) that had that color.  This is analgous to a 'count vectorized' text file in which the 'word' is the RGB value and the 'count' is the number of pixels.  The total number of columns was 17,947, which is about half of what it would be if all 1600 pictures had distinct sets of 20 colors.  This gives me great hope that the pictures from each subreddit will be distinct from each other. The resultant dataframe is shown below.
 
-Processing to put that into a matrix
+<p float="center">
+  <img width="550" height="200" src=./graphs/Color_words_df.png>
+</p>
 
-Naive Bayes:
+Once I had the count vectorized colors, I divided each value by 300x300 (the number of pixels total) to find the 'term frequency' of each color.  
+
+Then I used SKLearn's Multinomial Naive Bayes to turn those frequencies into the probability that the color would be seen in each subreddit post.  Below, I have the final pie chart with the color, title, and body.  The colors are the inner most ring and the size of the each wedge is the probability that color will be present in the subreddit of choice.  The colors of each wedge are the actual colors.
+
+<p float="left">
+  <img width="250" height="250" src=./graphs/a_c_t_b.png>
+  <img width="250" height="250" src=./graphs/d_c_t_b_.png>
+</p>
+
+The results were interesting!  Black was overwhelmingly likely to be present in Doom, while most of the Animal Crossing pictures had varieties of pink.  Doom pictures had about the same accent colors, blue and green with only small variations, and Animal Crossing had a variety of pink hued pastels with a small amount of green.
+
 
 
 # Step 2 Logistic Regression and Gradient Boosted Random Forests 
