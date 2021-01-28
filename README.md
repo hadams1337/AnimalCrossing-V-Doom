@@ -68,15 +68,17 @@ The results were interesting, black was overwhelmingly likely to be present in D
 ## Render unto Animal Crossing that which is Animal Crossing's
 
 The 20 averaged colors above were further broken down into the number of pixels, red, green and blue values for each color.  This gave 80 columns containing the pixel count of the most prominent color to least prominent colors and respective red, green, and blue values from 0 to 255.  The dataframe is shown below.  Using this approach distills the 900,000 pixels with 3 colors each (2,700,000 pieces of information) to just 80 values per image.  I did this mostly because I wanted to see how abstract I could make the picture and still have it be somewhat recognizable to classification.
-Those colors, titles, and body text were classified using logistic regression, random forest, and gradient boosted random forest.  The results are shown in the table below. 
+This is what the resulting dataframe looked like:
 
 <p float="center">
-  <img width="550" height="250" src=./graphs/colors.png>
+  <img width="650" height="300" src=./graphs/colors.png>
 </p>
+
+Those colors, titles, and body text were classified using logistic regression, random forest, and gradient boosted random forest.  The results are shown in the table below.
 
 <table> 
 <tr>
-<th columnspan=5>Accuracy Data for Model Types</th>
+<th colspan="5">Accuracy Data for Model Types</th>
 </tr>
 <th>Data</th><th>Logistic Regression
 (color)</th><th>Random Forest
@@ -99,7 +101,7 @@ The surprising story was that 76% of the time the gradient boosted random forest
 The ROC curves for each classification are presented below.
 
 <p float="center">
-  <img align="middle" width="650" height="250" src=./graphs/ROC_curves.png>
+  <img align="middle" width="700" height="300" src=./graphs/ROC_curves.png>
 </p>
 The ROC curve for body words (left graph) have a relatively smooth curve, although even at low values of true positives, some false positives are present. 
 The color values ROC curve (middle graph) is interesting, showing a distinct plateau.  This indicates that there is a type or types of pictures that the model is unlikely to classifiy as animal crossing until the threshold is moved to nearly 100% false positives.  Investigation showed that these pictures were nearly all black or all white, and tended to be twitter screenshots.  This falls in line with the Naive-Bayes color story of black being likely to be in doom posts.  Additionaly, the accent colors played a much smaller role for doom posts, the major color tended to fill up more pixels, which is likely what led to white backgrounds being classified as doom.
