@@ -43,9 +43,9 @@ To fill out the picture of "what are common traits of doom and animal crossing p
 </p>
 The presence of the words "know" and "poll" in both sets of posts likely means that people are asking questions like, "do you know how to..." or submitting polls for many posts in both subreddits.
 
-## Pictures -KNN to find 'mood' of the pictures
+## Pictures -KMeans to find 'mood' of the pictures
 I was curious to see if I could use the colors of the pictures to see if the "mood" of the pictures varied between subreddits.  I wanted to check two things: what are the color differences between the two subreddits, and how much accent color is there in each picture?  Does the number and importance of accent colors vary between the groups?
-I average the colors for each picture using K-Nearest Neighbors to find 20 colors to represent the picture in RGB 256 values.  Then I rounded each value (red, green and blue) separately to the nearest 5 in hopes that I would get some repeat values, I didn't need precision to closer than 5 for each number.
+I average the colors for each picture using K-Means to find 20 colors to represent the picture in RGB 256 values.  Then I rounded each value (red, green and blue) separately to the nearest 5 in hopes that I would get some repeat values, I didn't need precision to closer than 5 for each number.
 The colors were recombined and formed the column names for a pandas dataframe in which the column names were the rgb value as a string and the values were the number of pixels in that file (row) that had that color.  This is analgous to a 'count vectorized' text file in which the 'word' is the RGB value and the 'count' is the number of pixels.  The total number of columns was 17,947, which is about half of what it would be if all 1600 pictures had distinct sets of 20 colors.  This gives me great hope that the pictures from each subreddit will be distinct from each other. The resultant dataframe is shown below.
 
 <p float="center">
